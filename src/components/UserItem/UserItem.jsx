@@ -2,12 +2,10 @@
 import css from './UserItem.module.css';
 import image from '../../images/picture1.png';
 import axios from "axios";
-import {useState} from "react";
+
 
 export const UserItem = ({ id, tweets, followers, avatar }) => {
-    const [increment, setIncrement] = useState(followers)
- 
-
+   
    
 
     const userUpdate = async ({ id, followers }) => {
