@@ -1,7 +1,53 @@
+
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.listItems {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 50px;
     padding: 0;
     list-style: none;
+}
+
+.btnLoadMore {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.22;
+    width: 196px;
+    height: 50px;
+    margin-top: 26px;
+    color: #373737;
+    background-color: #EBD8FF;
+    box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+    border-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+        background-color: #e2d0f5ee;
+    }
+}
+
+.btnDisabled {
+    font-weight: 600;
+        font-size: 18px;
+        line-height: 1.22;
+        width: 196px;
+        height: 50px;
+        margin-top: 26px;
+        color: #969292;
+        background-color: #e8ddf3;
+        box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+        border-color: transparent;
+        border-radius: 10px;
+        text-transform: uppercase;
+    
 }
