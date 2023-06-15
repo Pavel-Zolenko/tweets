@@ -1,8 +1,8 @@
 
+import { useEffect , useState} from "react";
+import axios from "axios";
 import css from './UserList.module.css';
 import { UserItem } from '../UserItem/UserItem';
-import axios from "axios";
-import { useEffect , useState} from "react";
 
 axios.defaults.baseURL = "https://648994ba5fa58521caafdd4d.mockapi.io";
 
@@ -17,14 +17,12 @@ export const UserList = () => {
         } catch (e) {
             return console.log(e);
         }
-    }
+    };
     
   useEffect(() => {
        userFetch().then(data => {
-            setDataUser(data)
-            
-        }).catch(error => console.log(error))
-            
+            setDataUser(data) 
+        }).catch(error => console.log(error))      
     }, [])
 
 
@@ -32,8 +30,8 @@ export const UserList = () => {
         <ul
             className={css.container}
         >
-            {dataUser.map(({ id, tweets, followers, avatar}) => (
-                <UserItem key={id} id={id} tweets={tweets} followers={ followers} avatar={avatar} />
+            {dataUser.map(({ id, tweets, followers, avatar, following}) => (
+                <UserItem key={id} id={id} tweets={tweets} followers={followers} avatar={avatar} following={ following} />
             ))}
         </ul>
     );

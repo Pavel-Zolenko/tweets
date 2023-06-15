@@ -1,7 +1,9 @@
 p{
     margin: 0;
 }
+
 .container {
+    position: relative;
     width: 380px;
     height: 460px;
     background: linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%);
@@ -14,6 +16,11 @@ p{
     justify-content: center;
     align-items: center;
     height: 214px; 
+}
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .img {
@@ -53,7 +60,6 @@ p{
     flex-direction: column;
     padding-top: 62px;
     padding-bottom: 36px;
-
 }
 .wrarText {
     display: flex;
@@ -68,8 +74,6 @@ p{
     line-height: 1.2;
     color: #EBD8FF;
     text-transform: uppercase;
-
-
 }
 
 
@@ -86,9 +90,30 @@ p{
     border-color: transparent;
     border-radius: 10px;
     cursor: pointer;
+    text-transform: uppercase;
     &:hover,
     &:focus {
-        background-color: #ebd8ffee;
+        background-color: #e2d0f5ee;
     }
-};
+}
 
+.btnFollowing {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.22;
+    width: 196px;
+    height: 50px;
+    margin-top: 26px;
+    color: #373737;
+    background-color: #5CD3A8;
+    box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+    border-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+        background-color: #54cca0e0;
+    }
+}
