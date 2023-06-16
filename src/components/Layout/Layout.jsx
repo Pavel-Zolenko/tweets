@@ -1,6 +1,6 @@
 import { Outlet, useLocation} from 'react-router-dom';
 import { Suspense } from 'react';
-import {  Header, Nav, Link, Logo, LogoWrapper } from "./Layout.styled";
+import {  Header, Nav, Link, LogoWrapper } from "./Layout.styled";
 import logo from '../../images/logo.png';
 
 export const Layout = () => {
