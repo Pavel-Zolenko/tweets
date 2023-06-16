@@ -6,7 +6,7 @@ import image from '../../images/picture1.png';
 import logo from '../../images/logo.png';
 
 
-export const UserItem = ({ id, tweets, followers, avatar, following }) => {
+const UserItem = ({ id, tweets, followers, avatar, following }) => {
     const [follower, setFollower] = useState(followers);
     const [isFollowing, setIsFollowing] = useState(following);
 
@@ -61,5 +61,8 @@ export const UserItem = ({ id, tweets, followers, avatar, following }) => {
         </li>
     );
 };
+
+
+export default UserItem;
 
 
