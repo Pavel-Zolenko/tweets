@@ -37,13 +37,6 @@ p{
 }
 .circle {
     position: absolute;
-    /* left: 150px;
-    top: -35px;
-    width: 80px;
-    height: 80px;
-    background-color: #4B2A99;
-    border-radius: 50%; */
-
     width: 80px;
     height: 80px;
     left: 50%;
