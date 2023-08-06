@@ -15,6 +15,8 @@ const UserList = () => {
     const [dataUser, setDataUser] = useState([]);
     const [visible, setVisible] = useState(3);
     const [isLoading, setIsLoading] = useState(false);
+    const [filter, setFilter] = useState('show all');
+        
 
     const location = useLocation();
     const backLinkHref = location.state?.from ?? "/";
@@ -36,22 +38,55 @@ const UserList = () => {
             setDataUser(data)
         }).catch(error => console.log(error))
     }, []);
-    
+
+        
     
     const showMoreItems = () => {
         setVisible(prevValue => prevValue + 3)
     };
 
+    const onFilterChange = event => {
+        setFilter(event.target.value);
+    };
+
+    const showFilteredTweets = () => {
+        if (filter === 'follow') {
+            return dataUser.filter(tweet => tweet.following === false);
+        } else if (filter === 'followings') {
+            return dataUser.filter(tweet => tweet.following === true);
+        } else {
+            return dataUser;
+        }
+    };
+
+    const showFilteredTweet = showFilteredTweets();
+    
+    const onUpdate = (id, isFollowing) => {
+        setDataUser((prevUsers) =>
+            prevUsers.map((user) =>
+                user.id === id? { ...user, following: isFollowing } : user
+            )
+        );
+                
+    };
     
     return (
         <>
             {!isLoading && <div className={css.container}>
                 
                 <BackLink to={backLinkHref}> <HiArrowCircleLeft size="24" /> Back to Home</BackLink>
+                <label className={css.label}>
+                    Filter tweets:
+                    <select value={filter} onChange={onFilterChange} className={css.select}>
+                        <option value="show all">show all</option>
+                        <option value="follow">follow</option>
+                        <option value="followings">followings</option>
+                    </select>
+                </label>
                
                 <ul className={css.listItems} >
-                    {dataUser.slice(0, visible).map(({ id, tweets, followers, avatar, following }) => (
-                        <UserItem key={id} id={id} tweets={tweets} followers={followers} avatar={avatar} following={following} />
+                    {showFilteredTweet.slice(0, visible).map(({ id, tweets, followers, avatar, following }) => (
+                        <UserItem key={id} id={id} tweets={tweets} followers={followers} avatar={avatar} following={following} onUpdate={onUpdate} />
                     ))}
                 </ul>
                 

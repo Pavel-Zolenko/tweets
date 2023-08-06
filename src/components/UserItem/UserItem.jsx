@@ -6,7 +6,7 @@ import image from '../../images/picture1.png';
 import logo from '../../images/logo.png';
 
 
-const UserItem = ({ id, tweets, followers, avatar, following }) => {
+const UserItem = ({ id, tweets, followers, avatar, following, onUpdate }) => {
     const [follower, setFollower] = useState(followers);
     const [isFollowing, setIsFollowing] = useState(following);
 
@@ -27,11 +27,13 @@ const UserItem = ({ id, tweets, followers, avatar, following }) => {
             const decrFollowers = follower - 1;
             setFollower(decrFollowers)
             setIsFollowing(false)
+            onUpdate(id, !isFollowing)
             userUpdate({ id, followers: decrFollowers, following: false })
         } else {
             const incrFollowers = follower + 1;
             setFollower(incrFollowers)
             setIsFollowing(true)
+            onUpdate(id, !isFollowing)
             userUpdate({ id, followers: incrFollowers, following: true })
         }
     };
@@ -54,8 +56,7 @@ const UserItem = ({ id, tweets, followers, avatar, following }) => {
                     <p className={css.text}> {tweets} tweets</p>
                     <p className={css.text}> {formatNunber} Followers</p>
                 </div>
-                {!isFollowing && <button onClick={() => handleUpdate(id, follower, isFollowing)} type='button' className={css.btn}>Follow</button>}
-                {isFollowing && <button onClick={() => handleUpdate(id, follower, isFollowing)} type='button' className={css.btnFollowing} >Following</button>}
+                <button onClick={() => handleUpdate(id, follower, isFollowing)} type='button' className={isFollowing? css.btnFollowing : css.btn } >{isFollowing ? 'Following' : 'Follow' }</button>
                  
             </div>
         </li>
