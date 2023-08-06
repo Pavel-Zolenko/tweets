@@ -1,5 +1,6 @@
 import { useEffect , useState} from "react";
-import  UserItem  from '../UserItem/UserItem';
+import UserItem from '../UserItem/UserItem';
+import Skeleton from '../Skeleton/Skeleton';
 import css from './UserList.module.css';
 import axios from "axios";
 
@@ -17,7 +18,6 @@ const UserList = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [filter, setFilter] = useState('show all');
         
-
     const location = useLocation();
     const backLinkHref = location.state?.from ?? "/";
 
@@ -66,13 +66,15 @@ const UserList = () => {
             prevUsers.map((user) =>
                 user.id === id? { ...user, following: isFollowing } : user
             )
-        );
-                
+        );       
     };
+
+    
     
     return (
         <>
-            {!isLoading && <div className={css.container}>
+            
+            <div className={css.container}>
                 
                 <BackLink to={backLinkHref}> <HiArrowCircleLeft size="24" /> Back to Home</BackLink>
                 <label className={css.label}>
@@ -83,17 +85,27 @@ const UserList = () => {
                         <option value="followings">followings</option>
                     </select>
                 </label>
-               
-                <ul className={css.listItems} >
-                    {showFilteredTweet.slice(0, visible).map(({ id, tweets, followers, avatar, following }) => (
-                        <UserItem key={id} id={id} tweets={tweets} followers={followers} avatar={avatar} following={following} onUpdate={onUpdate} />
-                    ))}
-                </ul>
-                
-                {visible < dataUser.length && <button onClick={showMoreItems} type="button" className={css.btnLoadMore}>Load More</button>}
-                {visible >= dataUser.length && <button onClick={showMoreItems} type="button" disabled className={css.btnDisabled}>Load More</button>}
-           
-            </div>}
+
+
+                {isLoading && <ul className={css.listItems}>
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                </ul>}
+        
+                {!isLoading && (
+                    <>
+                        <ul className={css.listItems} >
+                            {showFilteredTweet.slice(0, visible).map(({ id, tweets, followers, avatar, following }) => (
+                                <UserItem key={id} id={id} tweets={tweets} followers={followers} avatar={avatar} following={following} onUpdate={onUpdate} isLoading={isLoading} />
+                            ))}
+                        </ul>
+
+                        {visible < dataUser.length && <button onClick={showMoreItems} type="button" className={css.btnLoadMore}>Load More</button>}
+                        {visible >= dataUser.length && <button onClick={showMoreItems} type="button" disabled className={css.btnDisabled}>Load More</button>}
+                    </>
+                )}
+            </div>
            
         </>
     );

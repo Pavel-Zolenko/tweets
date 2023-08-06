@@ -6,10 +6,10 @@ import image from '../../images/picture1.png';
 import logo from '../../images/logo.png';
 
 
-const UserItem = ({ id, tweets, followers, avatar, following, onUpdate }) => {
+const UserItem = ({ id, tweets, followers, avatar, following, onUpdate, isLoading  }) => {
     const [follower, setFollower] = useState(followers);
     const [isFollowing, setIsFollowing] = useState(following);
-
+    
     const formatNunber = new Intl.NumberFormat('en-US').format(follower)
 
     const userUpdate = async ({ id, followers, following }) => {
@@ -39,8 +39,10 @@ const UserItem = ({ id, tweets, followers, avatar, following, onUpdate }) => {
     };
 
        
-    return (
+    return ( 
+        
         <li className={css.container}>
+            
             <img src={logo} alt={'question'} className={css.logo} />
             <div className={css.containerImg}>
                 <img src={image} alt={'question'} className={css.img} />
@@ -58,7 +60,7 @@ const UserItem = ({ id, tweets, followers, avatar, following, onUpdate }) => {
                 </div>
                 <button onClick={() => handleUpdate(id, follower, isFollowing)} type='button' className={isFollowing? css.btnFollowing : css.btn } >{isFollowing ? 'Following' : 'Follow' }</button>
                  
-            </div>
+                    </div>      
         </li>
     );
 };
